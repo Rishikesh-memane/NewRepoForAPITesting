@@ -1,0 +1,224 @@
+{
+	"info": {
+		"_postman_id": "f7b05006-e1dc-4a3c-bddf-a75e7abf23a0",
+		"name": "MiscCollection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "List Users",
+			"id": "8e7feda6-d01c-467c-bee4-3cffd5a6b6fc",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer ACCESS-TOKEN"
+					}
+				],
+				"url": "https://gorest.co.in/public/v2/users"
+			},
+			"response": []
+		},
+		{
+			"name": "New Request",
+			"id": "8cb2f8ca-bc42-4bcc-9695-db99d6a0bc20",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://reqres.in/api/users?page=1",
+					"protocol": "https",
+					"host": [
+						"reqres",
+						"in"
+					],
+					"path": [
+						"api",
+						"users"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SingleUserGet",
+			"id": "71114579-9aed-4a9e-89ef-566db5998438",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": \"1111\",\r\n    \"name\": \"John111\",\r\n    \"location\": \"india111\",\r\n    \"phone\": \"12345678901111\",\r\n    \"courses\": [\r\n        \"Python\",\r\n        \"JS\"\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:3000/students"
+			},
+			"response": []
+		},
+		{
+			"name": "New Request",
+			"id": "6e092ea1-9f0d-4ad4-9370-f8c9b36666d5",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": ""
+			},
+			"response": []
+		},
+		{
+			"name": "GenToken",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"var random = Math.random().toString(36).substring(2);\r",
+							"var useremail =\"Jim\"+random+\"@gmail.com\";\r",
+							"pm.environment.set(\"email_env\",useremail);\r",
+							"\r",
+							"//console.log(\"Math.random().toString(36): \" + Math.random().toString(36));"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"id": "db6be1c8-7924-48ab-801d-b93ffd3816af"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);\r",
+							"pm.environment.set(\"token_env\",jsonData.accessToken);\r",
+							"\r",
+							"console.log(pm.environment.get(\"token_env\"));"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"id": "12cf035a-305d-484c-890e-09bb9e8db6fe"
+					}
+				}
+			],
+			"id": "1cfdf359-0db9-4a50-a35b-5a89f1dc9bdd",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \r\n\t\"clientName\": \"Trainer1\", \r\n\t\"clientEmail\": \"{{email_env}}\" \r\n} ",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "https://simple-books-api.glitch.me/api-clients"
+			},
+			"response": []
+		},
+		{
+			"name": "GetBookStatus",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"var token = pm.environment.get(\"token_env\");"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"id": "151e9a5c-069a-408e-9fa0-7d3417ced6cb"
+					}
+				}
+			],
+			"id": "f0cbcb3d-0c3f-43ff-809a-1c3e794e6046",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "https://simple-books-api.glitch.me/status"
+			},
+			"response": []
+		},
+		{
+			"name": "BookList",
+			"id": "d0b06a0c-0a0a-4ddc-83c2-9fffd708d01d",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": ""
+			},
+			"response": []
+		},
+		{
+			"name": "GetSingleBook",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"var token = pm.environment.get(\"toekn_env\");"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"id": "5d195517-4665-442a-b7f6-d598f281b53c"
+					}
+				}
+			],
+			"id": "0fd85b21-b029-4701-a796-dbd860bb05b9",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{token}}"
+					}
+				},
+				"method": "GET",
+				"header": [],
+				"url": "https://simple-books-api.glitch.me/books/{{bookid_env}}"
+			},
+			"response": []
+		}
+	]
+}
